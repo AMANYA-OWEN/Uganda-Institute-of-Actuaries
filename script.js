@@ -137,10 +137,39 @@ document.addEventListener("DOMContentLoaded", function () {
         statusBox.textContent = "Please correct the highlighted fields before submitting.";
         return;
       }
-      statusBox.className = "form-status success";
-      statusBox.textContent = "Thank you \u2014 your enquiry has been recorded. The Institute aims to respond within two business days.";
-      contactForm.reset();
-      fields.forEach(function (fieldEl) { setFieldValid(fieldEl, true); });
+
+      var submitBtn = contactForm.querySelector("button[type=submit]");
+      var originalBtnText = submitBtn ? submitBtn.textContent : "";
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Sending\u2026"; }
+
+      var formData = new FormData(contactForm);
+
+      fetch(contactForm.action, {
+        method: "POST",
+        body: formData,
+        headers: { "Accept": "application/json" }
+      })
+        .then(function (response) {
+          if (response.ok) {
+            statusBox.className = "form-status success";
+            statusBox.textContent = "Thank you \u2014 your enquiry has been sent. The Institute aims to respond within two business days.";
+            contactForm.reset();
+            fields.forEach(function (fieldEl) { setFieldValid(fieldEl, true); });
+          } else {
+            return response.json().then(function (data) {
+              var msg = (data && data.errors && data.errors.map(function (er) { return er.message; }).join(", ")) || "Something went wrong. Please try again.";
+              statusBox.className = "form-status error";
+              statusBox.textContent = msg;
+            });
+          }
+        })
+        .catch(function () {
+          statusBox.className = "form-status error";
+          statusBox.textContent = "Could not send your message \u2014 please check your connection and try again.";
+        })
+        .finally(function () {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalBtnText; }
+        });
     });
 
     Array.prototype.forEach.call(contactForm.querySelectorAll(".form-field[data-field] input, .form-field[data-field] select, .form-field[data-field] textarea"), function (control) {
