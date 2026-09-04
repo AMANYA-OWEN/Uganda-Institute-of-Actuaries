@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | Institute of Actuaries of Uganda</title>
+  <meta name="description" content="Contact the Institute of Actuaries of Uganda office in Kampala, or enquire about membership.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .form-status { display: none; padding: 12px 14px; font-size: 13.5px; margin-bottom: 18px; border: 1px solid; }
+    .form-status.success { display: block; border-color: #2f6e3f; color: #2f6e3f; background: #f2f8f3; }
+    .form-status.error { display: block; border-color: var(--maroon-700); color: var(--maroon-700); background: #fbf2f3; }
+    .field-error { font-size: 12px; color: var(--maroon-700); margin-top: 4px; display: none; }
+    .form-field.invalid input, .form-field.invalid select, .form-field.invalid textarea { border-color: var(--maroon-700); }
+    .form-field.invalid .field-error { display: block; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container">
+      <span class="topbar-note">The Republic of Uganda &nbsp;|&nbsp; A body corporate under the Actuaries Act</span>
+      <ul class="topbar-links">
+        <li><a href="#">Members Portal</a></li>
+        <li><a href="#">Exam Results</a></li>
+        <li><a href="contact.html">Careers</a></li>
+      </ul>
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="index.html">
+        <svg class="seal" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="IAU seal">
+  <circle cx="27" cy="27" r="25" fill="none" stroke="#0b1f3a" stroke-width="1.5"/>
+  <circle cx="27" cy="27" r="21" fill="none" stroke="#a97c2f" stroke-width="1"/>
+  <text x="27" y="35" text-anchor="middle" font-family="Source Serif 4, Georgia, serif" font-size="21" fill="#0b1f3a">&#931;</text>
+</svg>
+        <span class="brand-text">
+          <span class="brand-name">Institute of Actuaries of Uganda</span>
+          <span class="brand-sub">Est. 2009 &middot; Kampala</span>
+        </span>
+      </a>
+    </div>
+    <nav class="primary-nav" aria-label="Primary">
+      <div class="container nav-row">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+          <li><a class="nav-cta" href="contact.html">Become a Member</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+      </div>
+    </nav>
+  </header>
+
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Contact</div>
+      <div class="eyebrow">Get in Touch</div>
+      <h1>Reach the Institute's office in Kampala.</h1>
+      <p>For membership enquiries, examination questions, or media requests, use the form below or the contact details opposite.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact-grid">
+      <div>
+        <div class="section-head">
+          <div class="eyebrow">Office</div>
+          <h2>Institute Secretariat</h2>
+          <div class="rule"></div>
+        </div>
+        <dl>
+          <div class="info-line"><dt>Address</dt><dd>Plot 14, Nakasero Road, Kampala, Uganda</dd></div>
+          <div class="info-line"><dt>Phone</dt><dd>+256 414 000 000</dd></div>
+          <div class="info-line"><dt>Email</dt><dd>info@iau.ug</dd></div>
+          <div class="info-line"><dt>Hours</dt><dd>Mon&ndash;Fri, 8:30am&ndash;5:00pm</dd></div>
+        </dl>
+        <div class="map-frame">Map placeholder &mdash; embed Google Maps or OpenStreetMap here with the Institute's exact coordinates.</div>
+      </div>
+
+      <div>
+        <div class="section-head">
+          <div class="eyebrow">Enquiry Form</div>
+          <h2>Send us a message</h2>
+          <div class="rule"></div>
+        </div>
+
+        <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+
+        <form id="contact-form" novalidate>
+          <div class="form-field" data-field="name">
+            <label for="f-name">Full name</label>
+            <input type="text" id="f-name" name="name" required>
+            <div class="field-error">Please enter your name.</div>
+          </div>
+          <div class="form-field" data-field="email">
+            <label for="f-email">Email address</label>
+            <input type="email" id="f-email" name="email" required>
+            <div class="field-error">Please enter a valid email address.</div>
+          </div>
+          <div class="form-field" data-field="reason">
+            <label for="f-reason">Reason for enquiry</label>
+            <select id="f-reason" name="reason" required>
+              <option value="">Select one&hellip;</option>
+              <option value="membership">Membership application</option>
+              <option value="exams">Examinations</option>
+              <option value="cpd">CPD compliance</option>
+              <option value="standards">Actuarial standards</option>
+              <option value="media">Media &amp; press</option>
+              <option value="other">Other</option>
+            </select>
+            <div class="field-error">Please select a reason.</div>
+          </div>
+          <div class="form-field" data-field="message">
+            <label for="f-message">Message</label>
+            <textarea id="f-message" name="message" rows="5" required></textarea>
+            <div class="field-error">Please enter a message.</div>
+          </div>
+          <p class="form-note">This form does not yet send email &mdash; it validates and shows a confirmation. Connect it to a backend (e.g. Formspree, a serverless function, or your own API) to receive submissions.</p>
+          <button type="submit" class="btn btn-primary">Submit Enquiry</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div class="guilloche" aria-hidden="true"></div>
+  <footer class="site-footer">
+    <div class="container footer-top">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand">
+            <svg class="seal" style="width:40px;height:40px" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="IAU seal">
+  <circle cx="27" cy="27" r="25" fill="none" stroke="#0b1f3a" stroke-width="1.5"/>
+  <circle cx="27" cy="27" r="21" fill="none" stroke="#a97c2f" stroke-width="1"/>
+  <text x="27" y="35" text-anchor="middle" font-family="Source Serif 4, Georgia, serif" font-size="21" fill="#0b1f3a">&#931;</text>
+</svg>
+            <span class="brand-name">Institute of Actuaries<br>of Uganda</span>
+          </div>
+          <p class="footer-desc">The professional body responsible for setting actuarial examination standards, regulating conduct, and advancing the practice of actuarial science in Uganda.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Organisation</h4>
+          <ul>
+            <li><a href="about.html">About the Institute</a></li>
+            <li><a href="about.html#governance">Council &amp; Governance</a></li>
+            <li><a href="about.html#conduct">Code of Conduct</a></li>
+            <li><a href="contact.html">Contact &amp; Office</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Profession</h4>
+          <ul>
+            <li><a href="programs.html">Examination Pathway</a></li>
+            <li><a href="programs.html#cpd">CPD Requirements</a></li>
+            <li><a href="resources.html">Actuarial Standards</a></li>
+            <li><a href="resources.html#library">Publications Library</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Related Bodies</h4>
+          <ul>
+            <li><a href="#">Insurance Regulatory Authority</a></li>
+            <li><a href="#">Bank of Uganda</a></li>
+            <li><a href="#">National Social Security Fund</a></li>
+            <li><a href="#">Ministry of Finance, Planning &amp; Economic Development</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>&copy; 2026 Institute of Actuaries of Uganda. All rights reserved.</span>
+      <span><a href="#">Privacy Notice</a> &nbsp;&middot;&nbsp; <a href="#">Terms of Use</a> &nbsp;&middot;&nbsp; <a href="#">Sitemap</a></span>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

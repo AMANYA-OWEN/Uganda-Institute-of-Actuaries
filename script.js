@@ -64,4 +64,89 @@ document.addEventListener("DOMContentLoaded", function () {
       statItems.forEach(runCountUp);
     }
   }
+
+  // --- Resource library: search + category filter (resources.html) ---
+  var libSearch = document.getElementById("lib-search");
+  var libFilters = document.getElementById("lib-filters");
+  var libList = document.getElementById("lib-list");
+  var libEmpty = document.getElementById("lib-empty");
+
+  if (libList) {
+    var libItems = Array.prototype.slice.call(libList.querySelectorAll(".lib-item"));
+    var activeCat = "all";
+
+    function applyLibFilters() {
+      var query = (libSearch && libSearch.value || "").trim().toLowerCase();
+      var visibleCount = 0;
+      libItems.forEach(function (item) {
+        var matchesCat = activeCat === "all" || item.getAttribute("data-cat") === activeCat;
+        var title = (item.getAttribute("data-title") || "").toLowerCase();
+        var matchesQuery = query === "" || title.indexOf(query) !== -1;
+        var show = matchesCat && matchesQuery;
+        item.style.display = show ? "" : "none";
+        if (show) visibleCount++;
+      });
+      if (libEmpty) libEmpty.style.display = visibleCount === 0 ? "block" : "none";
+    }
+
+    if (libSearch) {
+      libSearch.addEventListener("input", applyLibFilters);
+    }
+    if (libFilters) {
+      libFilters.addEventListener("click", function (e) {
+        var chip = e.target.closest(".lib-chip");
+        if (!chip) return;
+        Array.prototype.forEach.call(libFilters.querySelectorAll(".lib-chip"), function (c) {
+          c.setAttribute("aria-pressed", "false");
+        });
+        chip.setAttribute("aria-pressed", "true");
+        activeCat = chip.getAttribute("data-cat");
+        applyLibFilters();
+      });
+    }
+  }
+
+  // --- Contact form validation (contact.html) ---
+  var contactForm = document.getElementById("contact-form");
+  if (contactForm) {
+    var statusBox = document.getElementById("form-status");
+
+    function setFieldValid(fieldEl, valid) {
+      fieldEl.classList.toggle("invalid", !valid);
+    }
+
+    function validateField(fieldEl) {
+      var control = fieldEl.querySelector("input, select, textarea");
+      if (!control) return true;
+      var valid = control.checkValidity();
+      setFieldValid(fieldEl, valid);
+      return valid;
+    }
+
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var fields = Array.prototype.slice.call(contactForm.querySelectorAll(".form-field[data-field]"));
+      var allValid = true;
+      fields.forEach(function (fieldEl) {
+        if (!validateField(fieldEl)) allValid = false;
+      });
+
+      if (!statusBox) return;
+      if (!allValid) {
+        statusBox.className = "form-status error";
+        statusBox.textContent = "Please correct the highlighted fields before submitting.";
+        return;
+      }
+      statusBox.className = "form-status success";
+      statusBox.textContent = "Thank you \u2014 your enquiry has been recorded. The Institute aims to respond within two business days.";
+      contactForm.reset();
+      fields.forEach(function (fieldEl) { setFieldValid(fieldEl, true); });
+    });
+
+    Array.prototype.forEach.call(contactForm.querySelectorAll(".form-field[data-field] input, .form-field[data-field] select, .form-field[data-field] textarea"), function (control) {
+      control.addEventListener("blur", function () {
+        validateField(control.closest(".form-field"));
+      });
+    });
+  }
 });

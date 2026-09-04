@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resources &amp; Standards | Institute of Actuaries of Uganda</title>
+  <meta name="description" content="Actuarial Standards of Practice and publications issued by the Institute of Actuaries of Uganda.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Resource library — filterable list */
+    .lib-toolbar { display: flex; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+    .lib-toolbar input[type="search"] {
+      flex: 1; min-width: 220px; padding: 11px 14px; border: 1px solid #b9c0cc;
+      font-family: var(--font-body); font-size: 14.5px; background: #fff;
+    }
+    .lib-toolbar input[type="search"]:focus { outline: 2px solid var(--navy-700); border-color: var(--navy-700); }
+    .lib-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .lib-chip {
+      font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase;
+      padding: 9px 14px; border: 1px solid var(--line); background: var(--paper-raised); color: var(--ink-600);
+      cursor: pointer; user-select: none;
+    }
+    .lib-chip[aria-pressed="true"] { background: var(--navy-900); color: #fff; border-color: var(--navy-900); }
+    .lib-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+    .lib-item {
+      display: grid; grid-template-columns: 1fr auto auto; gap: 16px; align-items: center;
+      padding: 16px 0; border-bottom: 1px solid var(--line);
+    }
+    .lib-item-title { color: var(--navy-900); font-weight: 600; text-decoration: none; font-size: 15px; }
+    .lib-item-title:hover { color: var(--gold-600); }
+    .lib-item-cat { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--maroon-700); border: 1px solid var(--maroon-700); padding: 3px 8px; white-space: nowrap; }
+    .lib-item-date { font-family: var(--font-mono); font-size: 12px; color: var(--ink-600); white-space: nowrap; }
+    .lib-empty { padding: 30px 0; color: var(--ink-600); font-style: italic; display: none; }
+    @media (max-width: 720px) { .lib-item { grid-template-columns: 1fr; gap: 6px; } }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container">
+      <span class="topbar-note">The Republic of Uganda &nbsp;|&nbsp; A body corporate under the Actuaries Act</span>
+      <ul class="topbar-links">
+        <li><a href="#">Members Portal</a></li>
+        <li><a href="#">Exam Results</a></li>
+        <li><a href="contact.html">Careers</a></li>
+      </ul>
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="index.html">
+        <svg class="seal" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="IAU seal">
+  <circle cx="27" cy="27" r="25" fill="none" stroke="#0b1f3a" stroke-width="1.5"/>
+  <circle cx="27" cy="27" r="21" fill="none" stroke="#a97c2f" stroke-width="1"/>
+  <text x="27" y="35" text-anchor="middle" font-family="Source Serif 4, Georgia, serif" font-size="21" fill="#0b1f3a">&#931;</text>
+</svg>
+        <span class="brand-text">
+          <span class="brand-name">Institute of Actuaries of Uganda</span>
+          <span class="brand-sub">Est. 2009 &middot; Kampala</span>
+        </span>
+      </a>
+    </div>
+    <nav class="primary-nav" aria-label="Primary">
+      <div class="container nav-row">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="resources.html" class="active">Resources</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a class="nav-cta" href="contact.html">Become a Member</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+      </div>
+    </nav>
+  </header>
+
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Resources</div>
+      <div class="eyebrow">Standards &amp; Publications</div>
+      <h1>The technical backbone of actuarial practice in Uganda.</h1>
+      <p>Actuarial Standards of Practice are binding on all members providing actuarial advice. Search or filter the library below by category.</p>
+    </div>
+  </section>
+
+  <section class="section" id="library">
+    <div class="container">
+      <div class="lib-toolbar">
+        <input type="search" id="lib-search" placeholder="Search standards and publications&hellip;" aria-label="Search publications">
+        <div class="lib-filters" id="lib-filters" role="group" aria-label="Filter by category">
+          <button class="lib-chip" data-cat="all" aria-pressed="true">All</button>
+          <button class="lib-chip" data-cat="standards" aria-pressed="false">Standards</button>
+          <button class="lib-chip" data-cat="guidance" aria-pressed="false">Guidance</button>
+          <button class="lib-chip" data-cat="research" aria-pressed="false">Research</button>
+        </div>
+      </div>
+
+      <ul class="lib-list" id="lib-list">
+        <li class="lib-item" data-cat="standards" data-title="ASP 1: Reserving for Life Insurance Business">
+          <a class="lib-item-title" href="#">ASP 1 &mdash; Reserving for Life Insurance Business</a>
+          <span class="lib-item-cat">Standards</span>
+          <span class="lib-item-date">Rev. Mar 2025</span>
+        </li>
+        <li class="lib-item" data-cat="standards" data-title="ASP 2: Actuarial Valuation of Retirement Benefit Schemes">
+          <a class="lib-item-title" href="#">ASP 2 &mdash; Valuation of Retirement Benefit Schemes</a>
+          <span class="lib-item-cat">Standards</span>
+          <span class="lib-item-date">Rev. Jan 2024</span>
+        </li>
+        <li class="lib-item" data-cat="standards" data-title="ASP 3: IFRS 17 Reporting for Insurers">
+          <a class="lib-item-title" href="#">ASP 3 &mdash; IFRS 17 Reporting for Insurers</a>
+          <span class="lib-item-cat">Standards</span>
+          <span class="lib-item-date">Consultation, Jul 2026</span>
+        </li>
+        <li class="lib-item" data-cat="guidance" data-title="Guidance Note: Appointed Actuary Reporting Requirements">
+          <a class="lib-item-title" href="#">Guidance Note &mdash; Appointed Actuary Reporting</a>
+          <span class="lib-item-cat">Guidance</span>
+          <span class="lib-item-date">Feb 2024</span>
+        </li>
+        <li class="lib-item" data-cat="guidance" data-title="Guidance Note: Data Quality Standards for Statutory Valuations">
+          <a class="lib-item-title" href="#">Guidance Note &mdash; Data Quality for Statutory Valuations</a>
+          <span class="lib-item-cat">Guidance</span>
+          <span class="lib-item-date">Sep 2023</span>
+        </li>
+        <li class="lib-item" data-cat="research" data-title="Uganda Mortality Investigation 2020 to 2024">
+          <a class="lib-item-title" href="#">Uganda Mortality Investigation, 2020&ndash;2024</a>
+          <span class="lib-item-cat">Research</span>
+          <span class="lib-item-date">Nov 2025</span>
+        </li>
+        <li class="lib-item" data-cat="research" data-title="State of the Pensions Industry Report 2025">
+          <a class="lib-item-title" href="#">State of the Pensions Industry Report</a>
+          <span class="lib-item-cat">Research</span>
+          <span class="lib-item-date">2025 Edition</span>
+        </li>
+        <li class="lib-item" data-cat="standards" data-title="ASP 4: General Insurance Claims Reserving">
+          <a class="lib-item-title" href="#">ASP 4 &mdash; General Insurance Claims Reserving</a>
+          <span class="lib-item-cat">Standards</span>
+          <span class="lib-item-date">Rev. Aug 2022</span>
+        </li>
+      </ul>
+      <p class="lib-empty" id="lib-empty">No publications match your search.</p>
+    </div>
+  </section>
+
+  <div class="guilloche" aria-hidden="true"></div>
+  <footer class="site-footer">
+    <div class="container footer-top">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand">
+            <svg class="seal" style="width:40px;height:40px" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="IAU seal">
+  <circle cx="27" cy="27" r="25" fill="none" stroke="#0b1f3a" stroke-width="1.5"/>
+  <circle cx="27" cy="27" r="21" fill="none" stroke="#a97c2f" stroke-width="1"/>
+  <text x="27" y="35" text-anchor="middle" font-family="Source Serif 4, Georgia, serif" font-size="21" fill="#0b1f3a">&#931;</text>
+</svg>
+            <span class="brand-name">Institute of Actuaries<br>of Uganda</span>
+          </div>
+          <p class="footer-desc">The professional body responsible for setting actuarial examination standards, regulating conduct, and advancing the practice of actuarial science in Uganda.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Organisation</h4>
+          <ul>
+            <li><a href="about.html">About the Institute</a></li>
+            <li><a href="about.html#governance">Council &amp; Governance</a></li>
+            <li><a href="about.html#conduct">Code of Conduct</a></li>
+            <li><a href="contact.html">Contact &amp; Office</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Profession</h4>
+          <ul>
+            <li><a href="programs.html">Examination Pathway</a></li>
+            <li><a href="programs.html#cpd">CPD Requirements</a></li>
+            <li><a href="resources.html">Actuarial Standards</a></li>
+            <li><a href="resources.html#library">Publications Library</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Related Bodies</h4>
+          <ul>
+            <li><a href="#">Insurance Regulatory Authority</a></li>
+            <li><a href="#">Bank of Uganda</a></li>
+            <li><a href="#">National Social Security Fund</a></li>
+            <li><a href="#">Ministry of Finance, Planning &amp; Economic Development</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>&copy; 2026 Institute of Actuaries of Uganda. All rights reserved.</span>
+      <span><a href="#">Privacy Notice</a> &nbsp;&middot;&nbsp; <a href="#">Terms of Use</a> &nbsp;&middot;&nbsp; <a href="#">Sitemap</a></span>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
